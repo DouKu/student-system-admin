@@ -1,0 +1,7 @@
+.home-logo {
+  width: 400px;
+  height: 350px;
+  background: url(/images/logo.jpg) no-repeat;
+  background-size: 100% 100%;
+  margin: 150px auto;
+}
