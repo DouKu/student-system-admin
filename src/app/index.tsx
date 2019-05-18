@@ -27,7 +27,9 @@ import 'echarts/map/js/world';
 
 useStrict(true);
 
-const browserHistory = createBrowserHistory();
+const browserHistory = createBrowserHistory({
+  basename: 'admin'
+});
 const routerStore =  new RouterStore();
 const history = syncHistoryWithStore(browserHistory, routerStore);
 const rootStore = {
