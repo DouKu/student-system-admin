@@ -1,12 +1,12 @@
 export const headerPath = [
-  {
-    title: '我的站点',
-    path: '/website',
-  },
   // {
-  //   title: '退出',
-  //   path: '/signIn'
-  // }
+  //   title: '我的站点',
+  //   path: '/website',
+  // },
+  {
+    title: '退出',
+    path: '/signIn'
+  }
 ];
 
 export const siderPath = [
