@@ -188,12 +188,11 @@ export interface IRealTime {
 }
 
 export interface IStudent {
-  id:                number,
+  id?:               number,
   name:		           string,
 	student_id:        string,
 	sex:               string,
 	id_card:		       string,
-	password:	         string,
 	account_location:  string,
 	tel_num: 	         string,
 	is_dorm: 	         string,
@@ -203,5 +202,5 @@ export interface IStudent {
 	guardian_tel_num:  string,
 	guardian_id_card:  string,
 	first_subject:     string,
-	second_subject:    string,
+	second_subject:    any,
 }

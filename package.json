@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/react-router": "4.0.20",
     "@types/react-router-dom": "4.2.3",
-    "antd": "3.1.6",
+    "antd": "^3.18.1",
     "autoprefixer": "7.1.6",
     "axios": "0.18.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",

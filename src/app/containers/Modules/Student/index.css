@@ -3,3 +3,11 @@
   justify-content: space-around;
   padding: 20px 0;
 }
+.form-layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-layout > div {
+  width: 100%;
+}
