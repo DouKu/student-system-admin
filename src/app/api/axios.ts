@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from 'antd';
 
 axios.interceptors.request.use(function (config: any) {
-  config.baseURL = 'http://localhost:7002/api/admin';
+  config.baseURL = 'https://we.lgybetter.com/api/admin';
   config.headers = {
     authorization: `Bearer ${localStorage.getItem('token')}`
   }
