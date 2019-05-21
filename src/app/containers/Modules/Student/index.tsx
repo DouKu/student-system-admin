@@ -60,7 +60,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     const props = {
       showUploadList: false,
       name: 'file',
-      action: 'http://localhost:7002/api/admin/auth/user/import',
+      action: 'https://we.lgybetter.com/api/admin/auth/user/import',
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
