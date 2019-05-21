@@ -3,7 +3,7 @@ import Title from '../../../components/Title';
 import './index.css';
 import { inject, observer } from 'mobx-react';
 import { autobind } from 'core-decorators';
-import { Table, Button, Modal, Form, Input, Select } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Upload, message, Icon } from 'antd';
 import { IStudentPage, IStudent } from '../../../interfaces';
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -57,6 +57,30 @@ class Student extends React.Component<IStudentPage, StudentState> {
     await this.props.student.getStudents();
   }
   render () {
+    const props = {
+      showUploadList: false,
+      name: 'file',
+      action: 'http://localhost:7002/api/admin/auth/user/import',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      beforeUpload: () => {
+        message.loading('上传中');
+      },
+      onChange: info => {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.destroy();
+          message.success(`导入成功`);
+          this.props.student.getStudents();
+        } else if (info.file.status === 'error') {
+          message.destroy();
+          message.error(`导入失败`);
+        }
+      },
+    };
     const columns: any = [{
       title: 'ID',
       dataIndex: 'id',
@@ -146,6 +170,11 @@ class Student extends React.Component<IStudentPage, StudentState> {
       <div>
         <div className="action-panel">
           <Button type="primary" onClick={this.handleAddStudent}>添加</Button>
+          <Upload {...props} style={{marginLeft: 10}}>
+            <Button>
+              <Icon type="upload" />导入学生信息
+            </Button>
+          </Upload>
         </div>
         <div>
           <Title title="学生列表"/>

@@ -11,3 +11,7 @@
 .form-layout > div {
   width: 100%;
 }
+
+.action-panel {
+  margin-bottom: 20px;
+}
