@@ -175,6 +175,9 @@ class Student extends React.Component<IStudentPage, StudentState> {
               <Icon type="upload" />导入学生信息
             </Button>
           </Upload>
+          <Button style={{marginLeft: 10}} onClick={this.handleExport}>
+            <Icon type="export" />导出学生信息
+          </Button>
         </div>
         <div>
           <Title title="学生列表"/>
@@ -331,6 +334,9 @@ class Student extends React.Component<IStudentPage, StudentState> {
       visible: true,
       student
     });
+  }
+  handleExport () {
+    window.open(`http://localhost:7002/api/admin/auth/user/export/?token=${localStorage.getItem('token')}`)
   }
 }
 
