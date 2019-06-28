@@ -9,21 +9,12 @@ import {
   StudentStore,
   TokenStore, 
   AuthStore, 
-  HostStore, 
-  OverViewStore,
-  AssetsStore,
-  CommonDataStore,
-  PageStore,
-  RealTimeStore 
 } from './stores';
 import registerServiceWorker from './registerServiceWorker';
 import { Root } from './containers/Root';
 import './index.css';
 import Container from './containers/Container';
 import SignIn from './containers/Auth/signIn';
-// import SignUp from './containers/Auth/signUp';
-import './macarons';
-import 'echarts/map/js/world';
 
 useStrict(true);
 
@@ -36,12 +27,6 @@ const rootStore = {
   student: new StudentStore(),
   token: new TokenStore(),
   auth: new AuthStore(),
-  host: new HostStore(),
-  overview: new OverViewStore(),
-  assets: new AssetsStore(),
-  commmon: new CommonDataStore(),
-  page: new PageStore(),
-  realtime: new RealTimeStore(),
   router: routerStore
 };
 
@@ -54,10 +39,6 @@ ReactDOM.render(
             path="/signIn"
             component={SignIn}
           />
-          {/* <Route
-            path="/signUp"
-            component={SignUp}
-          /> */}
           <Route
             path="/"
             component={Container}

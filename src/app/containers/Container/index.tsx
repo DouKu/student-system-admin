@@ -4,7 +4,6 @@ import { IAuth } from '../../interfaces';
 import { Route, Switch } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import App from '../App';
-// import Website from '../Website';
 
 interface Container extends IAuth {
 }
@@ -17,7 +16,6 @@ class Container extends React.Component<Container, {}> {
       <div>
         <Header {...this.props} />
         <Switch>
-          {/* <Route path="/website" component={Website}/> */}
           <Route  path="/" component={App}/>
         </Switch>
       </div>
