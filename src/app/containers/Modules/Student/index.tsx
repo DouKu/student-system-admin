@@ -360,7 +360,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     });
   }
   handleExport () {
-    window.open(`http://we.lgybetter.com/api/admin/auth/user/export/?token=${localStorage.getItem('token')}`)
+    window.open(`/api/admin/auth/user/export/?token=${localStorage.getItem('token')}`)
   }
 }
 
