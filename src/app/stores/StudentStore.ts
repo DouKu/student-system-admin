@@ -14,6 +14,14 @@ class StudentStore {
     })
     return res;
   }
+  @action async postStudent (payload) {
+    const { data: res } = await api.postStudent(payload);
+    return res;
+  }
+  @action async putStudent (payload) {
+    const { data: res } = await api.putStudent(payload);
+    return res;
+  }
 }
 
 export default StudentStore;

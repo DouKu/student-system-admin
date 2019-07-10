@@ -205,9 +205,15 @@ class Student extends React.Component<IStudentPage, StudentState> {
                   <Input placeholder="请输入" value={this.state.student.student_id} onChange={this.handleInput.bind(this, 'student_id')}/>
                 </FormItem>
                 <FormItem label="性别:">
-                  <Select placeholder="请选择" value={this.state.student.is_dorm} onChange={this.handleSelect.bind(this, 'sex')}>
+                  <Select placeholder="请选择" value={this.state.student.sex} onChange={this.handleSelect.bind(this, 'sex')}>
                     <Option value="男">男</Option>
                     <Option value="女">女</Option>
+                  </Select>
+                </FormItem>
+                <FormItem label="是否住宿:">
+                  <Select placeholder="请选择" value={this.state.student.is_dorm} onChange={this.handleSelect.bind(this, 'is_dorm')}>
+                    <Option value="是">是</Option>
+                    <Option value="否">否</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="身份证:">
@@ -298,7 +304,25 @@ class Student extends React.Component<IStudentPage, StudentState> {
     });
   }
   handleSubmit () {
-    console.log(this.state.student)
+    if (this.state.student.id === 0) {
+      this.props.student.postStudent({
+        data: this.state.student
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+        this.props.student.getStudents();
+      });
+    } else {
+      this.props.student.putStudent({
+        data: this.state.student
+      }).then(() => {
+        this.setState({
+          visible: false,
+        });
+        this.props.student.getStudents();
+      });
+    }
   }
   handleCancel () {
     this.setState({
@@ -336,7 +360,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     });
   }
   handleExport () {
-    window.open(`http://localhost:7002/api/admin/auth/user/export/?token=${localStorage.getItem('token')}`)
+    window.open(`http://we.lgybetter.com/api/admin/auth/user/export/?token=${localStorage.getItem('token')}`)
   }
 }
 

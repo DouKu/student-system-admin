@@ -7,6 +7,26 @@ const getStuedents = () => {
   })
 }
 
+const putStudent = ({ data }) => {
+  data.second_subject = data.second_subject.join(',');
+  return rest.request({
+    method: 'put',
+    url: `/auth/user`,
+    data
+  });
+}
+
+const postStudent = ({ data }) => {
+  data.second_subject = data.second_subject.join(',');
+  return rest.request({
+    method: 'post',
+    url: `/auth/user`,
+    data
+  })
+}
+
 export default {
-  getStuedents
+  getStuedents,
+  putStudent,
+  postStudent
 }

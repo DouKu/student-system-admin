@@ -3,7 +3,7 @@ import { message } from 'antd';
 
 axios.interceptors.request.use(function (config: any) {
   config.baseURL = 'https://we.lgybetter.com/api/admin';
-  // config.baseURL = 'http://14.18.102.2:9001/api/admin';
+  // config.baseURL = 'http://localhost:7002/api/admin';
   config.headers = {
     authorization: `Bearer ${localStorage.getItem('token')}`
   }
@@ -19,7 +19,13 @@ axios.interceptors.response.use(function (response: any) {
   response.data.data = data;
   return response;
 }, function (error: any) {
-  console.dir(error)
+  const { response } = error;
+  const { status } = response;  
+  if (status === 401) {
+    message.info('登录认证失效，请重新登录');
+    localStorage.clear();
+    return window.location.href = '/admin/signIn';
+  }
   const msg = (error.response && error.response.data && error.response.data.message) || '服务器连接异常';
   message.info(msg);
   return Promise.reject({
