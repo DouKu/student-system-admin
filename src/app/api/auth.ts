@@ -17,7 +17,16 @@ const signUp = (data: ISignUp) => {
   });
 };
 
+const changePassword = (data) => {
+  return rest.request({
+    method: 'post',
+    url: '/auth/password/reset',
+    data
+  });
+}
+
 export default {
   signIn,
-  signUp
+  signUp,
+  changePassword
 }

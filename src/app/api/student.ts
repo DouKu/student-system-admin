@@ -25,8 +25,17 @@ const postStudent = ({ data }) => {
   })
 }
 
+const delStudent = ({ data }) => {
+  return rest.request({
+    method: 'delete',
+    url: `/auth/user`,
+    data
+  })
+}
+
 export default {
   getStuedents,
   putStudent,
-  postStudent
+  postStudent,
+  delStudent
 }

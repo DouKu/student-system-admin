@@ -60,7 +60,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     const props = {
       showUploadList: false,
       name: 'file',
-      action: 'https://we.lgybetter.com/api/admin/auth/user/import',
+      action: '/api/admin/auth/user/import',
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
@@ -162,7 +162,8 @@ class Student extends React.Component<IStudentPage, StudentState> {
       fixed: 'right', 
       render: (text, student) => (
         <span>
-          <a href="#" className="ant-dropdown-link" onClick={this.handleEdit.bind(this, student)}>编辑</a>
+          <a href="javascript:;" className="ant-dropdown-link" onClick={this.handleEdit.bind(this, student)}>编辑</a>
+          <a style={{marginLeft: 10}} href="javascript:;" className="ant-dropdown-link" onClick={this.handleDelete.bind(this, student)}>删除</a>
         </span>
       ),
     }];
@@ -357,6 +358,23 @@ class Student extends React.Component<IStudentPage, StudentState> {
     this.setState({
       visible: true,
       student
+    });
+  }
+  handleDelete (data) {
+    Modal.confirm({
+      title: '删除提醒',
+      content: '是否删除该学生信息?',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        this.props.student.delStudent({
+          data: {
+            id: data.id
+          }
+        }).then(() => {
+          this.props.student.getStudents();
+        })
+      }
     });
   }
   handleExport () {

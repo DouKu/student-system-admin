@@ -22,6 +22,10 @@ class StudentStore {
     const { data: res } = await api.putStudent(payload);
     return res;
   }
+  @action async delStudent (payload) {
+    const { data: res } = await api.delStudent(payload);
+    return res;
+  }
 }
 
 export default StudentStore;
