@@ -1,9 +1,10 @@
 import rest from './axios';
 
-const getStuedents = () => {
+const getStuedents = ({ query }) => {
   return rest.request({
     method: 'get',
     url: `/auth/users`,
+    params: query
   })
 }
 
@@ -33,9 +34,18 @@ const delStudent = ({ data }) => {
   })
 }
 
+const switchChoose = ({ data }) => {
+  return rest.request({
+    method: 'post',
+    url: `/auth/switch/choose`,
+    data
+  })
+}
+
 export default {
   getStuedents,
   putStudent,
   postStudent,
-  delStudent
+  delStudent,
+  switchChoose
 }

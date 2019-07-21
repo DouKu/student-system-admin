@@ -3,14 +3,16 @@ import Title from '../../../components/Title';
 import './index.css';
 import { inject, observer } from 'mobx-react';
 import { autobind } from 'core-decorators';
-import { Table, Button, Modal, Form, Input, Select, Upload, message, Icon } from 'antd';
+import { Table, Button, Modal, Form, Input, Switch, Select, Upload, message, Icon } from 'antd';
 import { IStudentPage, IStudent } from '../../../interfaces';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const { Option } = Select;
+
 interface StudentState {
   visible: boolean,
   student: IStudent
+  page: number
 }
 
 const formItemLayout = {
@@ -34,6 +36,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     super(props, state);
     this.state = {
       visible: false,
+      page: 0,
       student: {
         id:                0,
         name:		           '',
@@ -54,7 +57,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
     }
   }
   async componentWillMount () {
-    await this.props.student.getStudents();
+    await this.props.student.getStudents({});
   }
   render () {
     const props = {
@@ -74,7 +77,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
         if (info.file.status === 'done') {
           message.destroy();
           message.success(`导入成功`);
-          this.props.student.getStudents();
+          this.props.student.getStudents({});
         } else if (info.file.status === 'error') {
           message.destroy();
           message.error(`导入失败`);
@@ -179,13 +182,21 @@ class Student extends React.Component<IStudentPage, StudentState> {
           <Button style={{marginLeft: 10}} onClick={this.handleExport}>
             <Icon type="export" />导出学生信息
           </Button>
+          <div style={{marginTop: 15, fontSize: 15}}>
+            开启选课:
+            <Switch checked={this.props.student.choose} style={{marginLeft: 5}} onChange={this.handleSwitchChange}></Switch>
+          </div>
         </div>
         <div>
           <Title title="学生列表"/>
         </div>
         <Table
+          onChange={this.handleTableChange}
           scroll={{ x: 2200 }}
           columns={columns}
+          pagination={{
+            total: this.props.student.total,
+          }}
           dataSource={this.props.student.students.map((item, index) => ({...item, key: index}))}
         />
         <Modal
@@ -272,6 +283,20 @@ class Student extends React.Component<IStudentPage, StudentState> {
       </div>
     )
   }
+  handleSwitchChange (checked) {
+    this.props.student.switchChoose({});
+  }
+  handleTableChange (pagination) {
+    this.setState({
+      page: pagination.current
+    }, () => {
+      this.props.student.getStudents({
+        query: {
+          offset: 10 * (this.state.page - 1)
+        }
+      });
+    })
+  }
   handleInput (field, event: any) {
     let student = {};
     student[field] = event.target.value;
@@ -312,7 +337,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
         this.setState({
           visible: false,
         });
-        this.props.student.getStudents();
+        this.props.student.getStudents({});
       });
     } else {
       this.props.student.putStudent({
@@ -321,7 +346,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
         this.setState({
           visible: false,
         });
-        this.props.student.getStudents();
+        this.props.student.getStudents({});
       });
     }
   }
@@ -372,7 +397,7 @@ class Student extends React.Component<IStudentPage, StudentState> {
             id: data.id
           }
         }).then(() => {
-          this.props.student.getStudents();
+          this.props.student.getStudents({});
         })
       }
     });
