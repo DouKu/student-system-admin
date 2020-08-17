@@ -46,6 +46,9 @@ class Student extends React.Component<IStudentPage, StudentState> {
         account_location:  '',
         tel_num: 	         '',
         is_dorm: 	         '',
+        is_create_file:    '',
+        is_subsistence:    '',
+        is_disability:     '',
         address: 	         '',
         graduated_school:  '',
         guardian_name: 	   '',
@@ -124,6 +127,21 @@ class Student extends React.Component<IStudentPage, StudentState> {
       dataIndex: 'is_dorm',
       width: 100,
       key: 'is_dorm',
+    }, {
+      title: '是否建档立卡贫困户',
+      dataIndex: 'is_create_file',
+      width: 120,
+      key: 'is_create_file',
+    }, {
+      title: '是否低保户',
+      dataIndex: 'is_subsistence',
+      width: 100,
+      key: 'is_subsistence',
+    }, {
+      title: '是否残疾生',
+      dataIndex: 'is_disability',
+      width: 100,
+      key: 'is_disability',
     }, {
       title: '家庭住址',
       dataIndex: 'address',
@@ -228,6 +246,24 @@ class Student extends React.Component<IStudentPage, StudentState> {
                     <Option value="否">否</Option>
                   </Select>
                 </FormItem>
+                <FormItem label="是否建档立卡贫困户:">
+                  <Select placeholder="请选择" value={this.state.student.is_create_file} onChange={this.handleSelect.bind(this, 'is_create_file')}>
+                    <Option value="是">是</Option>
+                    <Option value="否">否</Option>
+                  </Select>
+                </FormItem>
+                <FormItem label="是否低保户:">
+                  <Select placeholder="请选择" value={this.state.student.is_subsistence} onChange={this.handleSelect.bind(this, 'is_subsistence')}>
+                    <Option value="是">是</Option>
+                    <Option value="否">否</Option>
+                  </Select>
+                </FormItem>
+                <FormItem label="是否残疾生:">
+                  <Select placeholder="请选择" value={this.state.student.is_disability} onChange={this.handleSelect.bind(this, 'is_disability')}>
+                    <Option value="是">是</Option>
+                    <Option value="否">否</Option>
+                  </Select>
+                </FormItem>
                 <FormItem label="身份证:">
                   <Input placeholder="请输入" value={this.state.student.id_card} onChange={this.handleInput.bind(this, 'id_card')}/>
                 </FormItem>
@@ -236,12 +272,6 @@ class Student extends React.Component<IStudentPage, StudentState> {
                 </FormItem>
                 <FormItem label="电话号码:">
                   <Input placeholder="请输入" value={this.state.student.tel_num} onChange={this.handleInput.bind(this, 'tel_num')}/>
-                </FormItem>
-                <FormItem label="是否内宿:">
-                  <Select placeholder="请选择" value={this.state.student.is_dorm} onChange={this.handleSelect.bind(this, 'is_dorm')}>
-                    <Option value="是">是</Option>
-                    <Option value="否">否</Option>
-                  </Select>
                 </FormItem>
                 <FormItem label="家庭住址:">
                   <TextArea placeholder="请输入" value={this.state.student.address} rows={3} onChange={this.handleInput.bind(this, 'address')}/>
@@ -366,6 +396,9 @@ class Student extends React.Component<IStudentPage, StudentState> {
         account_location:  '',
         tel_num: 	         '',
         is_dorm: 	         '',
+        is_create_file:    '', 
+        is_subsistence:    '',
+        is_disability:     '',
         address: 	         '',
         graduated_school:  '',
         guardian_name: 	   '',
